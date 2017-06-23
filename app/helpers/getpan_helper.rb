@@ -1,0 +1,2 @@
+module GetpanHelper
+end

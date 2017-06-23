@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pottermore</title>
+    </head>
+    <body>
+      <br>
+      <center><img src="http://i476.photobucket.com/albums/rr123/w-eagle/Harry%20Potter/harry_potter.png" style="height: 80px;"><br></center>
+      
+    <div class="container" style="width:700px;">
+      
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active">
+            <% if current_user.email == "admin@admin.com"%>
+                <a href="/getpan/admin"> Logged in as <%= current_user.email %> </a>
+            <% else %>
+                <a href="/getpan/user"> Logged in as <%= current_user.email %> </a>
+            <% end %>
+          </li>
+        <li role="presentation"><a href ="/">WRITE</a></li>
+        <li role="presentation"><a href='/logout'>LOGOUT</a></li>
+    </ul>
+    
+    <br><br>
+        <form action="/getpan/update/<%=@one_post.id%>" method="get">
+            
+            <div class="_hd clear">
+            	<div class="_section" style="">
+            	    <div class="divider">
+		                <span style="float:right;">Published at <b><%=@one_post.created_at.getlocal("+09:00").strftime("%Y.%m.%d %H:%M:%S")%></b></span>
+		                <br><span style="float:right;">Edited at<b> <%=@one_post.updated_at.getlocal("+09:00").strftime("%Y.%m.%d %H:%M:%S")%><b></span>
+		            </div>
+            	     <div class="divider"></div>
+            	     <span>No <b><%=@one_post.id%></b><span>
+            	    <center><h2><br><input type='text' name='title' value='<%=@one_post.title%>'></input></h2></center>
+            	    <div class="divider"></div>
+            	     <center><span>By <b><%=User.find(@one_post.user_id).email%></b><span></center>
+            	    
+            	    <div class="divider"></div>
+            	     <pre style="margin:10px; background-color:white;border:none;"><input type='text' name='content' value='<%=@one_post.content%>' style="width:620px; height:150px;"></input></pre>
+            	  
+            	  <center><table class="bbsview" border="0">
+        <tbody cellspacing="2">
+        <tr>
+            <th scope="row"><input type='submit' value='Update'></input></th>
+            <th scope="row"><a href="/getpan/destroy/<%=@one_post.id%>" style="color:black;"><button>Delete</button></a></th>
+          </tr>
+        </tbody>
+      </table></center>
+            	  
+            	    
+            	</div>
+            	<br>
+        	</div>
+
+        </form>
+                
+        <br>
+        
+        <div class="commentbox" id="commentbox">
+            <div class="comment"><p class="site-font-color">Replies <%= @one_post.replies.length%></p></div>
+            
+            <% @one_post.replies.each do |r| %>
+            <div class="comment-list">
+              <p class="comment-addr"> <%= r.content %>
+               <% if current_user.email == 'admin@admin.com' %>
+               <a href="/getpan/destroy_reply/<%=r.id%>">삭제</a></p>
+            <%end%>
+            </div>
+            <%end%>
+            
+
+            <div class="confirm">
+                <form action="/getpan/add_reply/<%= @one_post.id %>" method="POST">
+                    <input type='text' name='content' style="width:660px; height:57px;"></input>
+                    <input type="hidden" name='post_id' value='<%=@one_post.id %>'>
+                    
+                    <center><br><input type='submit' value='Reply'></input></center>
+                </form>
+            </div>
+          </div>
+   
+       
+        </div>
+        </div>
+        
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My page</title>
+    </head>
+    <body>
+      <br>
+        <center><img src="http://i476.photobucket.com/albums/rr123/w-eagle/Harry%20Potter/harry_potter.png" style="height: 80px;"><br></center>
+    <div class="container"  style="width:700px;">
+      
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active">
+            <% if current_user.email == "admin@admin.com"%>
+                <a href="/getpan/admin"> Logged in as <%= current_user.email %> </a>
+            <% else %>
+                <a href="/getpan/user"> Logged in as <%= current_user.email %> </a>
+            <% end %>
+          </li>
+        <li role="presentation"><a href ="/">WRITE</a></li>
+        <li role="presentation"><a href='/logout'>LOGOUT</a></li>
+    </ul>
+    
+    <br><br>
+    
+    <table id="search_posts" class="table">
+    <thead>
+      <tr>
+          <th class="column_post_id" style="display">Id</th>
+          <th class="column_title" style="display">Title</th>
+          <th class="column_created_at" style="display">Created at</th>
+          <th class="column_updated_at" style="display">Updated at</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @allpost.each do |x| %>
+            <% if x.user_id == current_user.id %>
+        <tr class="row_post">
+          <td class="column_post_id" style="display"><%=x.id%></td>
+          <td class="column_title" style="display"><a href="/getpan/page/<%=x.id%>"><%=x.title%> (<%=x.replies.length%>)</a></td>
+          
+          <td class="column_created_at" style="display"><%=x.created_at.getlocal("+09:00").strftime("%Y.%m.%d %H:%M:%S")%></td>
+          <td class="column_updated_at" style="display"><%=x.updated_at.getlocal("+09:00").strftime("%Y.%m.%d %H:%M:%S")%></td>
+        </tr>
+        <%end%>
+      <%end%>
+    </tbody>
+
+  </table>
+
+</div>
+    </body>
+</html>

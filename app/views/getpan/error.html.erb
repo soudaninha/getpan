@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ooops</title>
+    </head>
+    <body>
+      <br>
+        <center><img src="http://i476.photobucket.com/albums/rr123/w-eagle/Harry%20Potter/harry_potter.png" style="height: 80px;"><br></center>
+    <div class="container" style="width:700px;">
+      
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active">
+            <% if current_user.email == "admin@admin.com"%>
+                <a href="/getpan/admin"> Logged in as <%= current_user.email %> </a>
+            <% else %>
+                <a href="/getpan/user"> Logged in as <%= current_user.email %> </a>
+            <% end %>
+          </li>
+        <li role="presentation"><a href ="/">WRITE</a></li>
+        <li role="presentation"><a href='/logout'>LOGOUT</a></li>
+    </ul>
+    
+    <br><br>
+        <center><img src="https://vignette1.wikia.nocookie.net/harrypotter/images/b/bc/Patronus_Bloomsbury.png/revision/latest?cb=20160803190952" style="height: 350px;"><br>
+        <h1 style="font: 66px Courier;">Expecto Patronum<h1>
+            <h4 style="font-family: Courier;">Forbidden You don’t have permission to access</h4><center>
+</div>
+    </body>
+</html>

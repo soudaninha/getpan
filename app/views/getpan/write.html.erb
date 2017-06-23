@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Write</title>
+    </head>
+    <body>
+        <br><br>
+        <center><img src="http://i476.photobucket.com/albums/rr123/w-eagle/Harry%20Potter/harry_potter.png" style="height: 80px;"><br></center>
+    <div class="container" style="width:700px;">
+      
+    <ul class="nav nav-tabs">
+        <li role="presentation">
+            <% if current_user.email == "admin@admin.com"%>
+                <a href="/getpan/admin"> Logged in as <%= current_user.email %> </a>
+            <% else %>
+                <a href="/getpan/user"> Logged in as <%= current_user.email %> </a>
+            <% end %>
+          </li>
+        <li role="presentation" class="active"><a href ="/">WRITE</a></li>
+        <li role="presentation"><a href='/logout'>LOGOUT</a></li>
+    </ul>
+    
+    <br><br>
+        
+        <div>
+        <form action="/getpan/create" method="post">
+            
+            <div class="divider"></div>
+            <center><h2><input type='text' name='title' placeholder='Enter Title Here' style="background:none;border:none;"></input></h2></center>
+            	   <div class="divider"></div>
+            	   
+    	   <div class="divider"></div>
+    	     <pre style="margin:10px; background:none;border:none;"><input type='textarea' name='content' placeholder='wingardium leviOsa, not leviosAH.' style="width:600px; height:300px;"></input></pre>
+    	  
+           <input type="hidden" name='user_id' value='<%=current_user.id %>'>
+           <center><input type='submit' value='Write'></center>
+        </form>
+        </div>
+</div>
+    </body>
+</html>
+
+
+
